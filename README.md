@@ -21,3 +21,5 @@ options:
   -o OUTPUT, --output OUTPUT
                         参数 保存到文件
 ```
+# 编译命令
+pyinstaller -F  -w ./main.py --distpath=out -n sosearch
