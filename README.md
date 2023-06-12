@@ -22,4 +22,7 @@ options:
                         参数 保存到文件
 ```
 # 编译命令
+rm -rf out build *.log searchso.spec 
 pyinstaller -F  -w ./main.py --distpath=out -n sosearch
+cp ./sosearch ~/.bin
+sudo chmod a+x ~/.bin/sosearch
