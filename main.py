@@ -75,7 +75,7 @@ def main():
             os.remove(args.saveall)
     except Exception as e:
         print("remove {}".format(args.output), e)
-        return
+
     if os.path.isdir(args.sofilepath):
         print(args.sofilepath, "> 是一个目录")
         rangedir(args.sofilepath, args.search)
