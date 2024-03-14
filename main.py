@@ -19,8 +19,8 @@ def searchso(sopath, s):
     arrayStr = []
     result = None
     if out is not None:
-        print("> {}:开始分析!".format(os.path.split(sopath)[1]))
-        print("> commad: strings -a {} | grep {}".format(sopath, s))
+        # print("> {}:开始分析!".format(os.path.split(sopath)[1]))
+        # print("> commad: strings -a {} | grep {}".format(sopath, s))
         result = out.decode('utf-8')
         if args.saveall is not None and result is not None:
             with open(args.saveall, 'a') as f:
@@ -30,19 +30,23 @@ def searchso(sopath, s):
                 f.close()
         try:
             if args.ignorecase == 1:
-                print("> -i 1 默认忽略大小写")
+                # print("> -i 1 默认忽略大小写")
                 items = re.finditer(s, result, re.IGNORECASE)
             else:
                 items = re.finditer(s, result)
-                print("> -i 0 区分大小写")
+                # print("> -i 0 区分大小写")
+            isfind = False
             for i in items:
+                isfind = True
                 arg = result[i.start():-1]
                 print(arg[:arg.find('\n')])
                 if args.output:
                     arrayStr.append(arg[:arg.find('\n')])
+            if isfind == True:
+                print('search {} found'.format(os.path.split(sopath)[1]))
         except Exception as e:
             print(e)
-        print("> {}:分析完成!".format(os.path.split(sopath)[1]))
+        # print("> {}:分析完成!".format(os.path.split(sopath)[1]))
         if args.output is not None and len(arrayStr):
             with open(args.output, 'a') as f:
                 f.write('<====' + os.path.split(sopath)[1] + "====\n")
